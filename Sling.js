@@ -1,16 +1,23 @@
 class Sling{
-    constructor(b1,b2){
+    constructor(b1,p2){
         var slingProps = {
             bodyA : b1,
-            bodyB : b2,
+            pointB : p2,
             stiffness : 0.05
         }
-        this.Sling = Matter.Constraint.create(slingProps);
-        World.add(world, this.Sling);
+        this.sling = Matter.Constraint.create(slingProps);
+        World.add(world, this.sling);
     }
+
     display(){
-        var posA = this.Sling.bodyA.position;
-        var posB = this.Sling.bodyB.position;
-        line(posA.x,posA.y,posB.x,posB.y);
+        if(this.sling.bodyA){
+            var posA = this.sling.bodyA.position;
+            var posB = this.sling.pointB;
+            line(posA.x,posA.y,posB.x,posB.y);
+        }
+    }
+
+    slingBreak(){
+        this.sling.bodyA = null;
     }
 }

@@ -35,11 +35,11 @@ function setup(){
     log4 = new Log(760,120,150, PI/7);
     log5 = new Log(870,120,150, -PI/7);
 
-    log6 = new Log(100,200,100, PI/2);
+    // log6 = new Log(100,200,100, PI/2);
 
     bird = new Bird(110,100);
 
-    sling = new Sling(bird.body,log6.body);
+    sling = new Sling(bird.body, {x:180,y:100});
 
     // var slingProps = {
     //     bodyA: bird.body,
@@ -53,9 +53,9 @@ function setup(){
 function draw(){
     background(backgroundImg);
     Engine.update(engine);
-    console.log(box2.body.position.x);
-    console.log(box2.body.position.y);
-    console.log(box2.body.angle);
+    // console.log(box2.body.position.x);
+    // console.log(box2.body.position.y);
+    // console.log(box2.body.angle);
     box1.display();
     box2.display();
     ground.display();
@@ -71,7 +71,7 @@ function draw(){
     log4.display();
     log5.display();
 
-    log6.display();
+    // log6.display();
 
     bird.display();
     platform.display();
@@ -79,4 +79,13 @@ function draw(){
     sling.display();
 
     // line(bird.body.position.x, bird.body.position.y, log6.body.position.x, log6.body.position.y)
+}
+
+function mouseDragged(){
+    // console.log('hi');
+    Matter.Body.setPosition(bird.body, {x:mouseX, y:mouseY});
+}
+
+function mouseReleased(){
+    sling.slingBreak();
 }
